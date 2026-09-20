@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Herbarium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- hidden svg filters -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="paperNoise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0.29  0 0 0 0 0.24  0 0 0 0 0.17  0 0 0 0.5 0"/>
+    </filter>
+    <filter id="softShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.2" flood-color="#4a3c2c" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+</svg>
+
+<button id="soundToggle" aria-pressed="false" aria-label="Sonido">♪</button>
+
+<!-- ============ COVER ============ -->
+<section id="cover">
+  <div class="paper-texture"></div>
+  <div class="cover-inner">
+    <span class="cover-corner tl"></span><span class="cover-corner tr"></span>
+    <span class="cover-corner bl"></span><span class="cover-corner br"></span>
+    <svg class="cover-emblem" viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="32" r="21" stroke="#a9813f" stroke-width="1" opacity="0.6"/>
+      <path d="M32 14 L32 50 M14 32 L50 32" stroke="#a9813f" stroke-width="0.7" opacity="0.5"/>
+      <path d="M32 12 c5 6 5 12 0 18 c-5 -6 -5 -12 0 -18 Z" fill="#b98a80" opacity="0.55"/>
+      <text x="32" y="10" text-anchor="middle" font-size="8" fill="#a9813f" opacity="0.7">✦</text>
+    </svg>
+    <h1 class="cover-title">Herbarium</h1>
+    <p class="cover-sub hand">Flores, estrellas y pequeñas cosas bonitas.</p>
+    <div class="cover-divider"></div>
+    <button id="openBtn">ABRIR EL HERBARIO</button>
+    <p class="cover-foot">cuaderno de botánica &amp; observaciones</p>
+  </div>
+</section>
+
+<!-- ============ MAIN BOOK ============ -->
+<main id="book" aria-hidden="true">
+  <div class="sky-field" id="skyField"></div>
+
+  <div id="starCounter">Estrellas encontradas: <span id="starCount">0</span> / 7</div>
+
+  <header class="book-header">
+    <h2>Un pequeño herbario</h2>
+    <p class="hand">recolectado con cuidado, hoja por hoja</p>
+  </header>
+
+  <section class="herbarium-page" id="herbariumPage">
+    <span class="classify-line" style="top:6px; left:12px;">fam. Rosaceae · Liliaceae · Asteraceae</span>
+    <span class="page-stamp" style="top:0; right:6px;">Lámina I</span>
+
+    <div class="flower-grid">
+
+      <!-- ROSE -->
+      <article class="specimen" style="--tilt:-1.4deg;">
+        <div class="tape" style="--tape-rot:-4deg;"></div>
+        <div class="flower-wrap" id="roseWrap" tabindex="0" role="button" aria-label="Rosa prensada">
+          <div class="note" id="roseNote">Una de las flores que tenía que estar aquí.</div>
+          <svg viewBox="0 0 160 210" width="150" height="197">
+            <defs>
+              <radialGradient id="roseGrad" cx="45%" cy="40%" r="65%">
+                <stop offset="0%" stop-color="#d6a89c"/>
+                <stop offset="60%" stop-color="#b98a80"/>
+                <stop offset="100%" stop-color="#8f5c52"/>
+              </radialGradient>
+              <linearGradient id="leafGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#8a9066"/>
+                <stop offset="100%" stop-color="#5c6440"/>
+              </linearGradient>
+            </defs>
+            <!-- stem -->
+            <path d="M80 130 C 78 160, 82 180, 78 205" stroke="#6b7048" stroke-width="2.4" fill="none" opacity="0.85"/>
+            <!-- leaves -->
+            <path class="petal" style="--px:60px;--py:165px;--sway:4deg" d="M80 165 C 55 158, 42 170, 40 188 C 60 186, 76 178, 80 165 Z" fill="url(#leafGrad)" opacity="0.8"/>
+            <path class="petal" style="--px:100px;--py:150px;--sway:-3deg" d="M80 150 C 102 145, 116 154, 120 170 C 100 170, 85 162, 80 150 Z" fill="url(#leafGrad)" opacity="0.75"/>
+            <!-- rose bloom: layered petals -->
+            <g filter="url(#softShadow)">
+              <path class="petal" style="--px:80px;--py:75px;--sway:3deg" d="M80 40 C 105 45, 118 68, 108 92 C 122 84, 128 62, 112 44 C 128 50, 134 74, 118 96 C 100 100, 85 90, 80 75 Z" fill="url(#roseGrad)" opacity="0.92"/>
+              <path class="petal" style="--px:80px;--py:78px;--sway:-4deg" d="M80 40 C 55 45, 42 68, 52 92 C 38 84, 32 62, 48 44 C 32 50, 26 74, 42 96 C 60 100, 75 90, 80 75 Z" fill="url(#roseGrad)" opacity="0.9"/>
+              <path class="petal" style="--px:80px;--py:80px;--sway:5deg" d="M80 48 C 92 50, 100 64, 94 80 C 104 76, 108 60, 98 50 C 108 54, 112 70, 100 84 C 88 86, 80 78, 80 66 Z" fill="#c9948a" opacity="0.95"/>
+              <path class="petal" style="--px:80px;--py:80px;--sway:-5deg" d="M80 48 C 68 50, 60 64, 66 80 C 56 76, 52 60, 62 50 C 52 54, 48 70, 60 84 C 72 86, 80 78, 80 66 Z" fill="#c9948a" opacity="0.95"/>
+              <path class="petal" style="--px:80px;--py:74px;--sway:2deg" d="M80 54 C 88 56, 92 66, 87 76 C 74 76, 70 62, 80 54 Z" fill="#a86b60" opacity="0.95"/>
+              <path d="M80 58 c6 4 8 12 3 18 c-6 -3 -10 -12 -3 -18 Z" fill="#7d453d" opacity="0.85"/>
+            </g>
+          </svg>
+        </div>
+        <p class="specimen-label">Rosa · pressed 3 pétalos</p>
+        <span class="specimen-number">No. 07</span>
+      </article>
+
+      <!-- LILY -->
+      <article class="specimen" style="--tilt:0.9deg;">
+        <div class="tape" style="--tape-rot:3deg;"></div>
+        <div class="flower-wrap" id="lilyWrap" tabindex="0" role="button" aria-label="Lirio prensado">
+          <div class="note" id="lilyNote">Esta no podía faltar.</div>
+          <svg viewBox="0 0 170 230" width="150" height="203">
+            <defs>
+              <linearGradient id="lilyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#faf3e1"/>
+                <stop offset="70%" stop-color="#eddcc0"/>
+                <stop offset="100%" stop-color="#d9c49a"/>
+              </linearGradient>
+            </defs>
+            <path d="M85 140 C 82 168, 88 190, 84 222" stroke="#707a4c" stroke-width="2.4" fill="none" opacity="0.85"/>
+            <path class="petal" style="--px:66px;--py:180px;--sway:4deg" d="M85 178 C 62 172, 50 184, 48 200 C 66 198, 80 190, 85 178 Z" fill="#6f7a4e" opacity="0.8"/>
+            <g filter="url(#softShadow)">
+              <!-- 6 long petals -->
+              <path class="petal" style="--px:85px;--py:120px;--sway:3deg" d="M85 120 C 88 80, 82 40, 85 8 C 92 42, 98 84, 92 122 Z" fill="url(#lilyGrad)" opacity="0.95"/>
+              <path class="petal" style="--px:85px;--py:120px;--sway:-3deg" d="M85 120 C 82 80, 88 40, 85 8 C 78 42, 72 84, 78 122 Z" fill="url(#lilyGrad)" opacity="0.95"/>
+              <path class="petal" style="--px:85px;--py:122px;--sway:5deg" d="M85 122 C 108 96, 128 70, 140 44 C 122 62, 100 88, 88 118 Z" fill="url(#lilyGrad)" opacity="0.9"/>
+              <path class="petal" style="--px:85px;--py:122px;--sway:-5deg" d="M85 122 C 62 96, 42 70, 30 44 C 48 62, 70 88, 82 118 Z" fill="url(#lilyGrad)" opacity="0.9"/>
+              <path class="petal" style="--px:85px;--py:124px;--sway:4deg" d="M85 124 C 100 108, 116 96, 122 78 C 110 90, 94 104, 86 122 Z" fill="#f2e4c8" opacity="0.85"/>
+              <path class="petal" style="--px:85px;--py:124px;--sway:-4deg" d="M85 124 C 70 108, 54 96, 48 78 C 60 90, 76 104, 84 122 Z" fill="#f2e4c8" opacity="0.85"/>
+              <!-- freckles -->
+              <circle cx="82" cy="70" r="1.3" fill="#a8763f" opacity="0.5"/>
+              <circle cx="88" cy="88" r="1.1" fill="#a8763f" opacity="0.45"/>
+              <circle cx="80" cy="100" r="1.2" fill="#a8763f" opacity="0.5"/>
+              <circle cx="90" cy="62" r="1" fill="#a8763f" opacity="0.4"/>
+              <!-- stamens -->
+              <path d="M85 120 L 70 96" stroke="#8a6a3c" stroke-width="1" opacity="0.6"/>
+              <path d="M85 120 L 100 96" stroke="#8a6a3c" stroke-width="1" opacity="0.6"/>
+              <path d="M85 120 L 85 90" stroke="#8a6a3c" stroke-width="1" opacity="0.6"/>
+              <circle cx="70" cy="94" r="2" fill="#c9863f" opacity="0.75"/>
+              <circle cx="100" cy="94" r="2" fill="#c9863f" opacity="0.75"/>
+              <circle cx="85" cy="88" r="2" fill="#c9863f" opacity="0.75"/>
+            </g>
+          </svg>
+        </div>
+        <p class="specimen-label">Lirio · fam. Liliaceae</p>
+        <span class="specimen-number">No. 12</span>
+      </article>
+
+      <!-- DAISY -->
+      <article class="specimen" style="--tilt:1.6deg;">
+        <div class="tape" style="--tape-rot:-2deg;"></div>
+        <div class="flower-wrap" id="daisyWrap" tabindex="0" role="button" aria-label="Margarita prensada">
+          <div class="note" id="daisyNote">Pequeña, sencilla y bonita.</div>
+          <div class="pollen-field" id="pollenField" style="position:absolute; left:50%; top:38%;"></div>
+          <svg viewBox="0 0 150 190" width="140" height="177">
+            <path d="M75 110 C 73 138, 77 158, 74 182" stroke="#767c50" stroke-width="2.2" fill="none" opacity="0.85"/>
+            <path class="petal" style="--px:58px;--py:150px;--sway:4deg" d="M75 148 C 55 144, 45 154, 44 168 C 60 166, 72 158, 75 148 Z" fill="#767c50" opacity="0.75"/>
+            <g filter="url(#softShadow)">
+              <g id="daisyPetals">
+                <!-- 12 thin petals -->
+              </g>
+              <circle cx="75" cy="90" r="13" fill="#d9a441" opacity="0.92"/>
+              <circle cx="75" cy="90" r="12" fill="none" stroke="#a9763a" stroke-width="0.6" opacity="0.35"/>
+              <circle cx="75" cy="90" r="8" fill="none" stroke="#a9763a" stroke-width="0.5" opacity="0.3"/>
+            </g>
+          </svg>
+        </div>
+        <p class="specimen-label">Margarita · silvestre</p>
+        <span class="specimen-number">No. 03</span>
+      </article>
+
+    </div>
+
+    <span class="classify-line" style="bottom:70px; right:16px;">obs. recolectadas con cuidado</span>
+  </section>
+
+  <div class="book-footer">✦ &nbsp; recolectado hoja por hoja &nbsp; ✦</div>
+</main>
+
+<!-- ============ SECRET ============ -->
+<div id="secretOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="secret-page">
+    <span class="page-stamp" style="position:static; display:inline-block; margin-bottom:14px;">Lámina secreta</span>
+    <h3 class="hand">Algunas cosas simplemente merecen guardarse.</h3>
+    <div class="secret-leaf">🌿</div>
+    <button id="closeSecret">cerrar</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
