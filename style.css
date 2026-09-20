@@ -508,6 +508,37 @@ button{ font-family:inherit; cursor:pointer; }
 }
 #closeSecret:hover{ background: var(--ink-soft); color: var(--cream-light); }
 
+.link-btn{
+  display:block;
+  margin:18px auto 0;
+  background:none;
+  border:none;
+  color: var(--rose-deep);
+  font-family:'Caveat', cursive;
+  font-size:1.15rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color .3s ease;
+}
+.link-btn:hover{ color: var(--ink); }
+
+.poem{
+  margin: 4px 0;
+}
+.poem p{
+  font-size:1.2rem;
+  line-height:1.55;
+  color: var(--ink);
+  margin:0;
+}
+.poem-divider{
+  color: var(--gold-soft);
+  font-size:0.9rem;
+  margin: 18px 0;
+  opacity:0.8;
+}
+#secretPage2[hidden], #secretPage1[hidden]{ display:none; }
+
 /* footer */
 .book-footer{
   text-align:center;

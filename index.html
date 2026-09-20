@@ -175,12 +175,34 @@
 
 <!-- ============ SECRET ============ -->
 <div id="secretOverlay" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="secret-page">
+
+  <div class="secret-page" id="secretPage1">
     <span class="page-stamp" style="position:static; display:inline-block; margin-bottom:14px;">Lámina secreta</span>
     <h3 class="hand">Un pequeño secreto, guardado solo para ti.</h3>
     <div class="secret-leaf">🌿</div>
+    <button id="toPoems" class="link-btn">leer un poema</button>
     <button id="closeSecret">cerrar</button>
   </div>
+
+  <div class="secret-page" id="secretPage2" hidden>
+    <span class="page-stamp" style="position:static; display:inline-block; margin-bottom:14px;">Lámina II</span>
+    <div class="poem hand">
+      <p>Prensé estas flores para que no se marchiten,<br>
+      como quise guardar cada instante contigo.<br>
+      Un lirio, una rosa, una margarita pequeña,<br>
+      pedacitos de un jardín que solo tú entiendes.</p>
+    </div>
+    <div class="poem-divider">✦</div>
+    <div class="poem hand">
+      <p>Entre estrellas antiguas dibujé un mapa,<br>
+      siete puntos de luz que llevan hasta ti.<br>
+      No hacen falta palabras grandes para decirlo,<br>
+      basta con saber que ahí estás, sin más.</p>
+    </div>
+    <button id="backToSecret" class="link-btn">volver</button>
+    <button id="closeSecret2">cerrar</button>
+  </div>
+
 </div>
 
 <script src="script.js"></script>

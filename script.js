@@ -263,21 +263,38 @@
   /* ================= SECRET SECTION ================= */
   var secretOverlay = document.getElementById('secretOverlay');
   var closeSecret = document.getElementById('closeSecret');
+  var closeSecret2 = document.getElementById('closeSecret2');
+  var secretPage1 = document.getElementById('secretPage1');
+  var secretPage2 = document.getElementById('secretPage2');
+  var toPoems = document.getElementById('toPoems');
+  var backToSecret = document.getElementById('backToSecret');
+
   function unlockSecret(){
     pageTurnSound();
     secretOverlay.classList.add('show');
     secretOverlay.removeAttribute('aria-hidden');
     closeSecret.focus();
   }
-  closeSecret.addEventListener('click', function(){
+  function hideSecretOverlay(){
     secretOverlay.classList.remove('show');
     secretOverlay.setAttribute('aria-hidden','true');
-  });
+  }
+  function goToPoems(){
+    pageTurnSound();
+    secretPage1.hidden = true;
+    secretPage2.hidden = false;
+  }
+  function backToFirstPage(){
+    pageTurnSound();
+    secretPage2.hidden = true;
+    secretPage1.hidden = false;
+  }
+  closeSecret.addEventListener('click', hideSecretOverlay);
+  if (closeSecret2) closeSecret2.addEventListener('click', hideSecretOverlay);
+  if (toPoems) toPoems.addEventListener('click', goToPoems);
+  if (backToSecret) backToSecret.addEventListener('click', backToFirstPage);
   secretOverlay.addEventListener('click', function(e){
-    if (e.target === secretOverlay){
-      secretOverlay.classList.remove('show');
-      secretOverlay.setAttribute('aria-hidden','true');
-    }
+    if (e.target === secretOverlay) hideSecretOverlay();
   });
 
   /* ================= DUST MOTES (reduced on mobile / disabled on reduced motion) ================= */
