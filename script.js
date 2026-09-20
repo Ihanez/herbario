@@ -195,7 +195,7 @@
       s.textContent = starGlyphs[Math.floor(Math.random()*starGlyphs.length)];
       s.style.left = rand(2,96) + '%';
       s.style.top = rand(2,96) + '%';
-      s.style.fontSize = rand(9,15) + 'px';
+      s.style.fontSize = rand(7,10) + 'px';
       s.style.animationDelay = rand(0,4) + 's';
       s.setAttribute('aria-hidden','true');
       skyField.appendChild(s);
